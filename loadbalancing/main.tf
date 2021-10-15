@@ -19,4 +19,19 @@ resource "aws_lb_target_group" "main_lb_tg" {
         timeout = var.tg_timeout
         interval = var.tg_interval
     }
+    
+    # lifecycle {
+    #     ignore_changes = [name]
+    #     create_before_destroy = true
+    # }
+}
+
+resource "aws_lb_listener" "main_lb_listener" {
+    load_balancer_arn = aws_lb.main_lb.arn
+    port = var.listener_port
+    protocol = var.listener_protocol 
+    default_action {
+        type = "forward"
+        target_group_arn = aws_lb_target_group.main_lb_tg.arn
+    }
 }

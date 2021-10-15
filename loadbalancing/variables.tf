@@ -15,3 +15,7 @@ variable "tg_unhealthy_threshold" {}
 variable "tg_interval" {}
 
 variable "tg_timeout" {}
+
+variable "listener_port" {}
+
+variable "listener_protocol" {}

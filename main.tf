@@ -37,4 +37,6 @@ module "loadbalancing" {
   tg_unhealthy_threshold = 2 
   tg_interval = 30
   tg_timeout = 3
+  listener_port = 80
+  listener_protocol = "HTTP"
 }
