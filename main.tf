@@ -25,3 +25,16 @@ module "database" {
   vpc_security_groups_ids = module.networking.vpc_security_groups_ids
   db_identifier = "main-db"
 }
+
+module "loadbalancing" {
+  source = "./loadbalancing"
+  public_subnet = module.networking.public_subnets
+  public_sg = module.networking.public_sg
+  tg_port = 80
+  tg_protocol = "HTTP" 
+  vpc_id = module.networking.vpc_id
+  tg_healthy_threshold = 2
+  tg_unhealthy_threshold = 2 
+  tg_interval = 30
+  tg_timeout = 3
+}
