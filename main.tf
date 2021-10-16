@@ -13,18 +13,18 @@ module "networking" {
   db_subnet_group = true
 }
 
-# module "database" {
-#   source = "./database"
-#   db_storage = 10
-#   db_engine_version = "5.7.22"
-#   db_instance_class = "db.t2.micro"
-#   dbname = var.dbname
-#   dbusername = var.dbusername
-#   dbpassword = var.dbpassword
-#   db_subnet_group_name = module.networking.db_subnet_group_name[0]
-#   vpc_security_groups_ids = module.networking.vpc_security_groups_ids
-#   db_identifier = "main-db"
-# }
+module "database" {
+  source = "./database"
+  db_storage = 10
+  db_engine_version = "5.7.22"
+  db_instance_class = "db.t2.micro"
+  dbname = var.dbname
+  dbusername = var.dbusername
+  dbpassword = var.dbpassword
+  db_subnet_group_name = module.networking.db_subnet_group_name[0]
+  vpc_security_groups_ids = module.networking.vpc_security_groups_ids
+  db_identifier = "main-db"
+}
 
 module "loadbalancing" {
   source = "./loadbalancing"
@@ -43,7 +43,7 @@ module "loadbalancing" {
 
 module "compute" {
   source = "./compute"
-  instance_count = 1
+  instance_count = 2
   instance_type = "t3.micro"
   public_sg = module.networking.public_sg
   public_subnet = module.networking.public_subnets
