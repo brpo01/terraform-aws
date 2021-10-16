@@ -48,4 +48,6 @@ module "compute" {
   public_sg = module.networking.public_sg
   public_subnet = module.networking.public_subnets
   vol_size = 10
+  key_name = "main-auth"
+  public_key_path = "/home/ubuntu/.ssh/id_rsa.pub"
 }

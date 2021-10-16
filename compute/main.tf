@@ -10,10 +10,14 @@ data "aws_ami" "main_ami" {
     }
 }
 
-
 resource "random_id" "main_node_id" {
     byte_length = 2
     count = var.instance_count
+}
+
+resource "aws_key_pair" "main_auth" {
+    key_name = var.key_name
+    public_key = file(var.public_key_path)
 }
 
 resource "aws_instance" "main_instance"{
@@ -23,7 +27,7 @@ resource "aws_instance" "main_instance"{
     tags = {
         Name = "main-instance-${random_id.main_node_id[count.index].dec}"
     }
-    # key_name = ""
+    key_name = aws_key_pair.main_auth.id
     vpc_security_group_ids = [var.public_sg]
     subnet_id = var.public_subnet[count.index]
     # user_data = ""
