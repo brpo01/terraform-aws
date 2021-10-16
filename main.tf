@@ -51,6 +51,7 @@ module "compute" {
   key_name = "main-auth"
   public_key_path = "/home/ubuntu/.ssh/id_rsa.pub"
   user_data_path = "${path.root}/userdata.tpl"
+  db_endpoint = module.database.db_endpoint
   dbname = var.dbname
   dbuser = var.dbusername
   dbpass = var.dbpassword
