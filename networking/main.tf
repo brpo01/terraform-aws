@@ -22,7 +22,7 @@ resource "aws_vpc" "main_vpc" {
   }
   
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = true //igw not getting destroyed on "terrafom destroy" cammand
   }
 }
 
