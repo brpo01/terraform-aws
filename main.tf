@@ -50,4 +50,8 @@ module "compute" {
   vol_size = 10
   key_name = "main-auth"
   public_key_path = "/home/ubuntu/.ssh/id_rsa.pub"
+  user_data_path = "${path.root}/userdata.tpl"
+  dbname = var.dbname
+  dbuser = var.dbusername
+  dbpass = var.dbpassword
 }
