@@ -30,7 +30,7 @@ module "loadbalancing" {
   source = "./loadbalancing"
   public_subnet = module.networking.public_subnets
   public_sg = module.networking.public_sg
-  tg_port = 80
+  tg_port = 8000
   tg_protocol = "HTTP" 
   vpc_id = module.networking.vpc_id
   tg_healthy_threshold = 2
@@ -55,4 +55,6 @@ module "compute" {
   dbname = var.dbname
   dbuser = var.dbusername
   dbpass = var.dbpassword
+  port = 8000
+  target_group_arn = module.loadbalancing.target_group_arn
 }

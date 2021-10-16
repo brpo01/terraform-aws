@@ -23,3 +23,7 @@ variable "dbname" {}
 variable "dbuser" {}
 
 variable "user_data_path" {}
+
+variable "target_group_arn" {}
+
+variable "port" {}

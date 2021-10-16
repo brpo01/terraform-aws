@@ -45,3 +45,10 @@ resource "aws_instance" "main_instance"{
         volume_size = var.vol_size
     }
 }
+
+resource "aws_lb_target_group_attachment" "main_tg_attachment" {
+    count = var.instance_count
+    target_group_arn = var.target_group_arn
+    target_id = aws_instance.main_instance[count.index].id
+    port = var.port
+}
